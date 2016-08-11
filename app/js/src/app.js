@@ -7,7 +7,7 @@ const app = {
 
     this.createPreloader();
 
-    sourceManager.load(e => this.preloader.animate(e.loaded))
+    sourceManager.load(e => this.preloader.animate(e.progress))
       .then(() => {
         this.preloader.remove();
         this.preloader = null;

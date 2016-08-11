@@ -4,9 +4,11 @@ const sourceManager = {
     this.queue.addEventListener('progress', callback);
     this.queue.loadManifest(this.manifest);
 
-    return new Promise((resolve, reject) => {
-      this.queue.addEventListener('complete', resolve);
-      this.queue.addEventListener('error', reject);
+    return new Promise(resolve => {
+      this.queue.addEventListener('complete', () => {
+        this.queue.removeAllEventListeners();
+        resolve();
+      });
     });
   },
   getResult(name) {
