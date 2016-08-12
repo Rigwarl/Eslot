@@ -1,4 +1,4 @@
-import MainScreen from '../screens/mainScreen';
+import MainScreen from '../screens/MainScreen';
 
 const screenManager = {
   init(stage) {
