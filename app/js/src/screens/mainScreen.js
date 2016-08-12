@@ -1,8 +1,7 @@
 import screenManager from '../managers/screenManager';
-import DOWrap from '../display/DOWrap';
 import Reel from '../display/Reel';
 
-export default class MainScreen extends DOWrap {
+export default class MainScreen extends createjs.Container {
   constructor() {
     super();
 
@@ -14,12 +13,12 @@ export default class MainScreen extends DOWrap {
     this.label.textAlign = 'center';
     this.label.x = screenManager.width / 2;
     this.label.y = 100;
-    this.DO.addChild(this.label);
+    this.addChild(this.label);
   }
   createReel() {
     this.reel = new Reel();
     this.reel.x = 100;
     this.reel.y = 250;
-    this.DO.addChild(this.reel);
+    this.addChild(this.reel);
   }
 }

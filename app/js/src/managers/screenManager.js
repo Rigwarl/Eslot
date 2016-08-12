@@ -19,7 +19,7 @@ const screenManager = {
       this.current.remove();
     }
     this.current = new this.screens[screenName]();
-    this.stage.addChild(this.current.DO);
+    this.stage.addChild(this.current);
   },
 };
 
