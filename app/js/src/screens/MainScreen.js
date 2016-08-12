@@ -1,5 +1,6 @@
 import screenManager from '../managers/screenManager';
 import Slot from '../display/Slot';
+import Btn from '../display/Btn';
 
 export default class MainScreen extends createjs.Container {
   constructor() {
@@ -7,6 +8,18 @@ export default class MainScreen extends createjs.Container {
 
     this.createLabel();
     this.createSlot();
+    this.createGui();
+  }
+  createGui() {
+    this.playBtn = new Btn('Play');
+    this.playBtn.x = 270;
+    this.playBtn.y = 500;
+    this.addChild(this.playBtn);
+
+    this.playBtn.addEventListener('click', () => {
+      this.slot.roll();
+      setTimeout(() => this.slot.stop(['Л', 'О', 'Л']), 2000);
+    });
   }
   createLabel() {
     this.label = new createjs.Text('Hello World', '50px Arial', '#000');
@@ -20,8 +33,5 @@ export default class MainScreen extends createjs.Container {
     this.slot.x = 100;
     this.slot.y = 150;
     this.addChild(this.slot);
-
-    setTimeout(() => this.slot.roll(), 500);
-    setTimeout(() => this.slot.stop(['Л', 'О', 'Л']), 2000);
   }
 }

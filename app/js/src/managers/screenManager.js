@@ -13,6 +13,7 @@ const screenManager = {
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener('tick', this.stage);
+    this.stage.enableMouseOver();
   },
   change(screenName) {
     if (this.current) {
