@@ -1,12 +1,12 @@
 import screenManager from '../managers/screenManager';
-import Reel from '../display/Reel';
+import Slot from '../display/Slot';
 
 export default class MainScreen extends createjs.Container {
   constructor() {
     super();
 
     this.createLabel();
-    this.createReel();
+    this.createSlot();
   }
   createLabel() {
     this.label = new createjs.Text('Hello World', '50px Arial', '#000');
@@ -15,10 +15,10 @@ export default class MainScreen extends createjs.Container {
     this.label.y = 100;
     this.addChild(this.label);
   }
-  createReel() {
-    this.reel = new Reel();
-    this.reel.x = 100;
-    this.reel.y = 250;
-    this.addChild(this.reel);
+  createSlot() {
+    this.slot = new Slot();
+    this.slot.x = 100;
+    this.slot.y = 250;
+    this.addChild(this.slot);
   }
 }
