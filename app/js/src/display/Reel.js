@@ -1,6 +1,4 @@
-import DOWrap from './DOWrap';
-
-export default class Reel extends DOWrap {
+export default class Reel extends createjs.Container {
   constructor() {
     super();
 

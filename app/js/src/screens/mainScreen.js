@@ -18,8 +18,8 @@ export default class MainScreen extends DOWrap {
   }
   createReel() {
     this.reel = new Reel();
-    this.reel.DO.x = 100;
-    this.reel.DO.y = 250;
-    this.DO.addChild(this.reel.DO);
+    this.reel.x = 100;
+    this.reel.y = 250;
+    this.DO.addChild(this.reel);
   }
 }
