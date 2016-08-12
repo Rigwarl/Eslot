@@ -1,4 +1,5 @@
 import sourceManager from './managers/sourceManager';
+import screenManager from './managers/screenManager';
 import Preloader from './display/Preloader';
 
 const app = {
@@ -7,14 +8,19 @@ const app = {
 
     this.createPreloader();
 
-    sourceManager.load(e => this.preloader.animate(e.progress))
-      .then(() => {
-        this.preloader.remove();
-        this.preloader = null;
-      });
+    sourceManager.load(e => {
+      this.preloader.animate(e.progress);
+      this.stage.update();
+    }).then(() => {
+      this.preloader.remove();
+      this.preloader = null;
 
-    createjs.Ticker.timingMode = createjs.Ticker.RAF;
-    createjs.Ticker.addEventListener('tick', this.stage);
+      const bg = new createjs.Bitmap(sourceManager.getResult('bg'));
+      this.stage.addChild(bg);
+
+      screenManager.init(this.stage);
+      screenManager.change('main');
+    });
   },
   createPreloader() {
     this.preloader = new Preloader();
