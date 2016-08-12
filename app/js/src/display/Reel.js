@@ -6,18 +6,34 @@ export default class Reel extends createjs.Container {
     this.createBg();
     this.createIcons();
     this.bindEvents();
+
     this.rolling = false;
+    this.stopped = false;
+    this.result = [null, null, null];
   }
   roll() {
     this.rolling = true;
   }
+  stop(result) {
+    this.stopped = true;
+    this.result = ['L', result, 'L'];
+  }
   tick() {
     if (this.rolling) {
       this.icons.forEach(icon => {
-        icon.y += 1;
+        icon.y += 5;
+
         if (icon.y >= 320) {
           icon.y = -160;
-          icon.symbol.text = 'A';
+
+          if (this.stopped) {
+            icon.symbol.text = this.result.pop();
+          } else {
+            icon.symbol.text = 'A';
+          }
+        } else if (icon.y >= 245 && this.stopped && !this.result.length) {
+          this.rolling = false;
+          this.stopped = false;
         }
       });
     }
