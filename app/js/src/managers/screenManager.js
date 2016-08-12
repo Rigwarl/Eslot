@@ -3,8 +3,6 @@ import MainScreen from '../screens/mainScreen';
 const screenManager = {
   init(stage) {
     this.stage = stage;
-    this.width = stage.canvas.width;
-    this.height = stage.canvas.height;
     this.current = null;
 
     this.screens = {
