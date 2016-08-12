@@ -12,7 +12,7 @@ const app = {
       this.preloader.animate(e.progress);
       this.stage.update();
     }).then(() => {
-      this.preloader.remove();
+      this.stage.removeChild(this.preloader);
       this.preloader = null;
 
       const bg = new createjs.Bitmap(sourceManager.getResult('bg'));
@@ -24,9 +24,9 @@ const app = {
   },
   createPreloader() {
     this.preloader = new Preloader();
-    this.preloader.DO.x = this.stage.canvas.width / 2;
-    this.preloader.DO.y = this.stage.canvas.height / 2;
-    this.stage.addChild(this.preloader.DO);
+    this.preloader.x = this.stage.canvas.width / 2;
+    this.preloader.y = this.stage.canvas.height / 2;
+    this.stage.addChild(this.preloader);
   },
 };
 

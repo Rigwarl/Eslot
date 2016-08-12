@@ -1,6 +1,4 @@
-import DOWrap from './DOWrap';
-
-export default class Preloader extends DOWrap {
+export default class Preloader extends createjs.Container {
   constructor() {
     super();
 
@@ -11,10 +9,10 @@ export default class Preloader extends DOWrap {
     this.border = new createjs.Shape();
     this.border.graphics.beginStroke('#0000ff').setStrokeStyle(4).drawRect(0, 0, 300, 50);
 
-    this.DO.regX = 150;
-    this.DO.regY = 25;
+    this.regX = 150;
+    this.regY = 25;
 
-    this.DO.addChild(this.progress, this.border);
+    this.addChild(this.progress, this.border);
   }
   animate(loaded) {
     this.progress.scaleX = loaded;
