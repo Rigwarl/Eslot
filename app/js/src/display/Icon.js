@@ -4,8 +4,8 @@ export default class Icon extends createjs.Container {
 
     this.createBg();
 
-    this.icon = new createjs.Text('F', '100px Arial', '#000');
-    this.addChild(this.icon);
+    this.symbol = new createjs.Text('F', '100px Arial', '#000');
+    this.addChild(this.symbol);
   }
   createBg() {
     this.bg = new createjs.Shape();

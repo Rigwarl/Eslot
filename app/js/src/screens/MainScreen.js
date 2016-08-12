@@ -20,5 +20,6 @@ export default class MainScreen extends createjs.Container {
     this.slot.x = 100;
     this.slot.y = 150;
     this.addChild(this.slot);
+    setTimeout(() => this.slot.roll(), 500);
   }
 }

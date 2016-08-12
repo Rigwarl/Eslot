@@ -5,6 +5,22 @@ export default class Reel extends createjs.Container {
     super();
     this.createBg();
     this.createIcons();
+    this.bindEvents();
+    this.rolling = false;
+  }
+  roll() {
+    this.rolling = true;
+  }
+  tick() {
+    if (this.rolling) {
+      this.icons.forEach(icon => {
+        icon.y += 1;
+        if (icon.y >= 320) {
+          icon.y = -160;
+          icon.symbol.text = 'A';
+        }
+      });
+    }
   }
   createBg() {
     this.bg = new createjs.Shape();
@@ -20,5 +36,8 @@ export default class Reel extends createjs.Container {
       this.icons.push(icon);
       this.addChild(icon);
     }
+  }
+  bindEvents() {
+    this.addEventListener('tick', () => this.tick());
   }
 }
