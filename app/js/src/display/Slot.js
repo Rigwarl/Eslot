@@ -13,8 +13,8 @@ export default class Slot extends createjs.Container {
   }
   createReels() {
     const reelsContainer = new createjs.Container();
-    this.addChild(reelsContainer);
     reelsContainer.mask = this.bg;
+    this.addChild(reelsContainer);
 
     this.reels = [];
     for (let i = 0; i < 3; i++) {
@@ -30,6 +30,6 @@ export default class Slot extends createjs.Container {
     });
   }
   stop(results) {
-    this.reels.forEach((reel, i) => reel.stop(results[i]));
+    this.reels.forEach((reel, i) => reel.stop(results[i], i * 250));
   }
 }
