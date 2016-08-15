@@ -14,17 +14,19 @@ export default class Reel extends createjs.Container {
   roll() {
     this.rolling = true;
   }
-  stop(result) {
-    this.stopped = true;
-    this.result = ['L', result, 'L'];
+  stop(result, timeout) {
+    setTimeout(() => {
+      this.stopped = true;
+      this.result = ['L', result, 'L'];
+    }, timeout);
   }
   tick() {
     if (this.rolling) {
       this.icons.forEach(icon => {
-        icon.y += 5;
+        icon.y += 16;
 
         if (icon.y >= 320) {
-          icon.y = -160;
+          icon.y -= 480;
 
           if (this.stopped) {
             icon.symbol.text = this.result.pop();
