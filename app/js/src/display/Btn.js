@@ -15,8 +15,10 @@ export default class Btn extends createjs.Container {
   }
   createText(text) {
     this.text = new createjs.Text(text, '30px Arial', '#000');
-    this.text.x = 46;
-    this.text.y = 8;
+    this.text.x = 75;
+    this.text.y = 25;
+    this.text.textAlign = 'center';
+    this.text.textBaseline = 'middle';
     this.addChild(this.text);
   }
   enable() {
