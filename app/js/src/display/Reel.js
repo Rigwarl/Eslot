@@ -5,11 +5,12 @@ export default class Reel extends createjs.Container {
     super();
     this.createBg();
     this.createIcons();
-    this.bindEvents();
 
     this.rolling = false;
     this.stopped = false;
     this.result = [null, null, null];
+
+    this.on('tick', this.moveIcons, this);
   }
   roll() {
     this.rolling = true;
@@ -21,23 +22,25 @@ export default class Reel extends createjs.Container {
     return new Promise(resolve => this.on('stop', resolve, null, true));
   }
 
-  moveIcon(icon) {
-    if (!this.rolling) {
-      return;
-    }
-    icon.y += 18;
-
-    if (icon.y >= 320) {
-      icon.y -= 480;
-
-      if (this.stopped) {
-        icon.symbol.text = this.result.pop();
-      } else {
-        icon.symbol.text = 'A';
+  moveIcons() {
+    this.icons.forEach(icon => {
+      if (!this.rolling) {
+        return;
       }
-    } else if (icon.y >= 245 && this.stopped && !this.result.length) {
-      this.stopIcons(icon);
-    }
+      icon.y += 18;
+
+      if (icon.y >= 320) {
+        icon.y -= 480;
+
+        if (this.stopped) {
+          icon.symbol.text = this.result.pop();
+        } else {
+          icon.symbol.text = 'A';
+        }
+      } else if (icon.y >= 245 && this.stopped && !this.result.length) {
+        this.stopIcons(icon);
+      }
+    });
   }
   stopIcons(lastIcon) {
     this.rolling = false;
@@ -63,10 +66,5 @@ export default class Reel extends createjs.Container {
       this.icons.push(icon);
       this.addChild(icon);
     }
-  }
-  bindEvents() {
-    this.addEventListener('tick', () => {
-      this.icons.forEach(this.moveIcon, this);
-    });
   }
 }

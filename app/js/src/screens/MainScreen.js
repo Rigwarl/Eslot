@@ -16,15 +16,16 @@ export default class MainScreen extends createjs.Container {
     this.gui.y = 500;
     this.addChild(this.gui);
 
-    this.gui.playBtn.addEventListener('click', () => {
-      this.slot.roll();
+    this.gui.playBtn.on('click', this.rollSlot, this);
+  }
+  rollSlot() {
+    this.slot.roll();
 
-      Promise.race([
-        new Promise(resolve => setTimeout(resolve, 2500)),
-        new Promise(resolve => this.gui.stopBtn.on('click', resolve, null, true)),
-      ]).then(() => this.slot.stop(['Л', 'О', 'Л']))
-        .then(() => this.gui.toReadyState());
-    });
+    Promise.race([
+      new Promise(resolve => setTimeout(resolve, 2500)),
+      new Promise(resolve => this.gui.stopBtn.on('click', resolve, null, true)),
+    ]).then(() => this.slot.stop(['Л', 'О', 'Л']))
+      .then(() => this.gui.toReadyState());
   }
   createLabel() {
     this.label = new createjs.Text('Hello World', '50px Arial', '#000');
