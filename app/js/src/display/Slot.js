@@ -3,6 +3,7 @@ import Reel from './Reel';
 export default class Slot extends createjs.Container {
   constructor() {
     super();
+    this.regX = 490 / 2;
     this.createBg();
     this.createReels();
   }
