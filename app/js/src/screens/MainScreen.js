@@ -14,7 +14,7 @@ export default class MainScreen extends createjs.Container {
   }
   createGui() {
     this.gui = new Gui();
-    this.gui.x = 325;
+    this.gui.x = 125;
     this.gui.y = 500;
     this.addChild(this.gui);
 
@@ -35,6 +35,7 @@ export default class MainScreen extends createjs.Container {
         this.points += 700;
         this.loveBar.setPoints(this.points);
         this.gui.toReadyState();
+        this.gui.stopBtn.enable();
       });
   }
   createLoveBar() {
