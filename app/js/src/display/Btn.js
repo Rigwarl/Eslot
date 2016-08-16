@@ -39,5 +39,7 @@ export default class Btn extends createjs.Container {
   bindEvents() {
     this.addEventListener('rollover', () => this.change('#ff0000'));
     this.addEventListener('rollout', () => this.change('#00ff00'));
+    this.addEventListener('mousedown', () => this.change('#0000ff'));
+    this.addEventListener('pressup', () => this.change('#ff0000'));
   }
 }
