@@ -30,6 +30,10 @@ export default class Slot extends createjs.Container {
     });
   }
   stop(results) {
-    this.reels.forEach((reel, i) => reel.stop(results[i], i * 250));
+    let res = Promise.resolve();
+    this.reels.forEach((reel, i) => {
+      res = res.then(() => reel.stop(results[i]));
+    });
+    return res;
   }
 }

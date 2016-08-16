@@ -18,7 +18,12 @@ export default class MainScreen extends createjs.Container {
 
     this.gui.playBtn.addEventListener('click', () => {
       this.slot.roll();
-      setTimeout(() => this.slot.stop(['Л', 'О', 'Л']), 1500);
+
+      Promise.race([
+        new Promise(resolve => setTimeout(resolve, 2500)),
+        new Promise(resolve => this.gui.stopBtn.on('click', resolve, null, true)),
+      ]).then(() => this.slot.stop(['Л', 'О', 'Л']))
+        .then(() => this.gui.toReadyState());
     });
   }
   createLabel() {
