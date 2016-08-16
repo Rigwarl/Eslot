@@ -1,7 +1,7 @@
 const sourceManager = {
-  load(callback) {
+  load(onProgress) {
     this.queue = new createjs.LoadQueue();
-    this.queue.addEventListener('progress', callback);
+    this.queue.addEventListener('progress', onProgress);
     this.queue.loadManifest(this.manifest);
 
     return new Promise(resolve => {

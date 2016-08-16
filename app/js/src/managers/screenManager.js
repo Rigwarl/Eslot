@@ -1,4 +1,4 @@
-import MainScreen from '../screens/mainScreen';
+import MainScreen from '../screens/MainScreen';
 
 const screenManager = {
   init(stage) {
@@ -13,10 +13,11 @@ const screenManager = {
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener('tick', this.stage);
+    this.stage.enableMouseOver();
   },
   change(screenName) {
     if (this.current) {
-      this.current.remove();
+      this.stage.removeChild(this.current);
     }
     this.current = new this.screens[screenName]();
     this.stage.addChild(this.current);
