@@ -2,8 +2,8 @@ export default class Btn extends createjs.Container {
   constructor(text) {
     super();
 
-    this.disabled = false;
-
+    this.cursor = 'pointer';
+    this.enabled = true;
     this.createBg();
     this.createText(text);
     this.bindEvents();
@@ -22,27 +22,22 @@ export default class Btn extends createjs.Container {
     this.addChild(this.text);
   }
   enable() {
-    this.disabled = false;
-    this.dispatchEvent('rollout');
+    this.enabled = true;
+    this.mouseEnabled = true;
   }
   disable() {
-    this.disabled = true;
-    this.bg.graphics = new createjs.Graphics().beginFill('#666666').drawRoundRect(0, 0, 150, 50, 25);
+    this.change('#666666');
+    this.enabled = false;
+    this.mouseEnabled = false;
+  }
+  change(color) {
+    if (!this.enabled) {
+      return;
+    }
+    this.bg.graphics = new createjs.Graphics().beginFill(color).drawRoundRect(0, 0, 150, 50, 25);
   }
   bindEvents() {
-    this.addEventListener('rollover', () => {
-      if (this.disabled) {
-        return;
-      }
-      this.bg.graphics = new createjs.Graphics().beginFill('#ff0000').drawRoundRect(0, 0, 150, 50, 25);
-      this.cursor = 'pointer';
-    });
-    this.addEventListener('rollout', () => {
-      if (this.disabled) {
-        return;
-      }
-      this.bg.graphics = new createjs.Graphics().beginFill('#00ff00').drawRoundRect(0, 0, 150, 50, 25);
-      this.cursor = null;
-    });
+    this.addEventListener('rollover', () => this.change('#ff0000'));
+    this.addEventListener('rollout', () => this.change('#00ff00'));
   }
 }
