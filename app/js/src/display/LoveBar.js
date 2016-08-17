@@ -1,8 +1,9 @@
+import dataManager from '../managers/dataManager';
+
 export default class LoveBar extends createjs.Container {
-  constructor(points) {
+  constructor() {
     super();
 
-    this.maxPoints = 6000;
     this.width = 300;
     this.height = 50;
     this.regX = this.width / 2;
@@ -11,10 +12,10 @@ export default class LoveBar extends createjs.Container {
 
     this.createBg();
     this.createChars();
-    this.setPoints(points);
+    this.moveProgress();
   }
-  setPoints(points) {
-    const rate = points / this.maxPoints;
+  moveProgress() {
+    const rate = dataManager.points / dataManager.maxPoints;
     let amount = Math.floor(rate * this.chars.length);
 
     createjs.Tween.get(this.progress)

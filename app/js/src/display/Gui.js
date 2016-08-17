@@ -1,3 +1,4 @@
+import dataManager from '../managers/dataManager';
 import Btn from './Btn';
 
 export default class Gui extends createjs.Container {
@@ -19,6 +20,13 @@ export default class Gui extends createjs.Container {
     bet.x = 165;
     bet.y = 8;
     betUp.x = 200;
+
+    betUp.addEventListener('click', () => {
+      bet.text = dataManager.changeBet(1);
+    });
+    betDown.addEventListener('click', () => {
+      bet.text = dataManager.changeBet(-1);
+    });
 
     this.addChild(betUp, betDown, bet);
   }

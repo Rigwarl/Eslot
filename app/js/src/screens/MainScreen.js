@@ -1,4 +1,5 @@
 import screenManager from '../managers/screenManager';
+import dataManager from '../managers/dataManager';
 import Slot from '../display/Slot';
 import Gui from '../display/Gui';
 import LoveBar from '../display/LoveBar';
@@ -7,7 +8,8 @@ export default class MainScreen extends createjs.Container {
   constructor() {
     super();
 
-    this.points = 1300;
+    dataManager.points = 1300;
+
     this.createLoveBar();
     this.createSlot();
     this.createGui();
@@ -32,14 +34,14 @@ export default class MainScreen extends createjs.Container {
       }, null, true)),
     ]).then(() => this.slot.stop(['Л', 'О', 'Л']))
       .then(() => {
-        this.points += 700;
-        this.loveBar.setPoints(this.points);
-        this.gui.toReadyState();
+        dataManager.points += 700 * dataManager.bet;
+        this.loveBar.moveProgress();
         this.gui.stopBtn.enable();
+        this.gui.toReadyState();
       });
   }
   createLoveBar() {
-    this.loveBar = new LoveBar(this.points);
+    this.loveBar = new LoveBar();
     this.loveBar.x = screenManager.width / 2;
     this.loveBar.y = 50;
     this.addChild(this.loveBar);
