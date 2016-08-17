@@ -10,16 +10,12 @@ const screenManager = {
     this.screens = {
       main: MainScreen,
     };
-
-    createjs.Ticker.timingMode = createjs.Ticker.RAF;
-    createjs.Ticker.addEventListener('tick', this.stage);
-    this.stage.enableMouseOver();
   },
   change(screenName) {
     if (this.current) {
       this.stage.removeChild(this.current);
     }
-    this.current = new this.screens[screenName]();
+    this.current = new this.screens[screenName](this.stage);
     this.stage.addChild(this.current);
   },
 };

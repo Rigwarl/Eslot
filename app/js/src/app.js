@@ -20,6 +20,10 @@ const app = {
 
       screenManager.init(this.stage);
       screenManager.change('main');
+
+      createjs.Ticker.timingMode = createjs.Ticker.RAF;
+      createjs.Ticker.addEventListener('tick', this.stage);
+      this.stage.enableMouseOver();
     });
   },
   createPreloader() {
