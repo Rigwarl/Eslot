@@ -24,11 +24,24 @@ export default class Btn extends createjs.Container {
   enable() {
     this.enabled = true;
     this.mouseEnabled = true;
+    this.checkOver();
   }
   disable() {
     this.change('#666666');
     this.enabled = false;
     this.mouseEnabled = false;
+  }
+  checkOver() {
+    if (!this.stage) {
+      return;
+    }
+    const point = this.globalToLocal(this.stage.mouseX, this.stage.mouseY);
+
+    if (this.hitTest(point.x, point.y)) {
+      this.change('#ff0000');
+    } else {
+      this.change('#00ff00');
+    }
   }
   change(color) {
     if (!this.enabled) {
@@ -40,6 +53,7 @@ export default class Btn extends createjs.Container {
     this.addEventListener('rollover', () => this.change('#ff0000'));
     this.addEventListener('rollout', () => this.change('#00ff00'));
     this.addEventListener('mousedown', () => this.change('#0000ff'));
-    this.addEventListener('pressup', () => this.change('#ff0000'));
+    this.addEventListener('pressup', () => this.checkOver());
+    this.addEventListener('added', () => this.checkOver());
   }
 }
