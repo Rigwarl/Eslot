@@ -4,6 +4,7 @@ import dataManager from '../managers/dataManager';
 import Slot from '../display/Slot';
 import Gui from '../display/Gui';
 import LoveBar from '../display/LoveBar';
+import WinTable from '../display/WinTable';
 
 export default class MainScreen extends createjs.Container {
   constructor() {
@@ -11,6 +12,7 @@ export default class MainScreen extends createjs.Container {
 
     this.createLoveBar();
     this.createSlot();
+    this.createWinTable();
     this.createGui();
   }
   createGui() {
@@ -58,5 +60,11 @@ export default class MainScreen extends createjs.Container {
     this.slot.x = screenManager.width / 2;
     this.slot.y = 150;
     this.addChild(this.slot);
+  }
+  createWinTable() {
+    this.winTable = new WinTable(dataManager.winTable, dataManager.bet);
+    this.winTable.x = 85;
+    this.winTable.y = 50;
+    this.addChild(this.winTable);
   }
 }
