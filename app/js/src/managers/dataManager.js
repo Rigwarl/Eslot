@@ -4,10 +4,12 @@ const dataManager = {
   maxBet: null,
   points: null,
   maxPoints: null,
+  winTable: null,
   changeBet(val) {
-    this.bet += val;
-    this.bet = this.bet < this.maxBet ? this.bet : this.maxBet;
-    this.bet = this.bet > this.minBet ? this.bet : this.minBet;
+    const newBet = this.bet + val;
+    if (newBet <= this.maxBet && newBet >= this.minBet) {
+      this.bet = newBet;
+    }
     return this.bet;
   },
 };
