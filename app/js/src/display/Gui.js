@@ -16,7 +16,7 @@ export default class Gui extends createjs.Container {
   createBet() {
     const betDown = new Btn('↓');
     const betUp = new Btn('↑');
-    const bet = new createjs.Text('1', '35px Arial', '#000');
+    const bet = new createjs.Text(dataManager.bet, '35px Arial', '#000');
     bet.x = 165;
     bet.y = 8;
     betUp.x = 200;
