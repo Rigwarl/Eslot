@@ -1,3 +1,4 @@
+import serverManager from '../managers/serverManager';
 import screenManager from '../managers/screenManager';
 import dataManager from '../managers/dataManager';
 import Slot from '../display/Slot';
@@ -22,21 +23,24 @@ export default class MainScreen extends createjs.Container {
   }
   rollSlot() {
     this.gui.toPlayState();
+    this.gui.stopBtn.disable();
     this.slot.roll();
 
-    Promise.race([
-      new Promise(resolve => setTimeout(resolve, 2500)),
-      new Promise(resolve => this.gui.stopBtn.on('click', () => {
-        this.gui.stopBtn.disable();
-        resolve();
-      }, null, true)),
-    ]).then(() => this.slot.stop(['Л', 'О', 'Л']))
-      .then(() => {
-        dataManager.points += 700 * dataManager.bet;
-        this.loveBar.moveProgress();
-        this.gui.stopBtn.enable();
-        this.gui.toReadyState();
-      });
+    serverManager.roll(dataManager.bet).then(r => {
+      this.gui.stopBtn.enable();
+      Promise.race([
+        new Promise(resolve => setTimeout(resolve, 2500)),
+        new Promise(resolve => this.gui.stopBtn.on('click', () => {
+          this.gui.stopBtn.disable();
+          resolve();
+        }, null, true)),
+      ]).then(() => this.slot.stop(r.symbols))
+        .then(() => {
+          dataManager.points = r.points;
+          this.loveBar.moveProgress();
+          this.gui.toReadyState();
+        });
+    });
   }
   createLoveBar() {
     this.loveBar = new LoveBar();
