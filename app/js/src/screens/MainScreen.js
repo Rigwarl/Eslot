@@ -26,14 +26,13 @@ export default class MainScreen extends createjs.Container {
     this.gui.stopBtn.disable();
     this.slot.roll();
 
+    const rollTimer = new Promise(resolve => setTimeout(resolve, 2500));
+
     serverManager.roll(dataManager.bet).then(r => {
       this.gui.stopBtn.enable();
       Promise.race([
-        new Promise(resolve => setTimeout(resolve, 2500)),
-        new Promise(resolve => this.gui.stopBtn.on('click', () => {
-          this.gui.stopBtn.disable();
-          resolve();
-        }, null, true)),
+        rollTimer,
+        new Promise(resolve => this.bindStopBtnClick(resolve)),
       ]).then(() => this.slot.stop(r.symbols))
         .then(() => {
           dataManager.points = r.points;
@@ -41,6 +40,12 @@ export default class MainScreen extends createjs.Container {
           this.gui.toReadyState();
         });
     });
+  }
+  bindStopBtnClick(callback) {
+    this.gui.stopBtn.on('click', () => {
+      this.gui.stopBtn.disable();
+      callback();
+    }, null, true);
   }
   createLoveBar() {
     this.loveBar = new LoveBar();
