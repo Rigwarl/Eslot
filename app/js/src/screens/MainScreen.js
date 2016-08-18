@@ -8,8 +8,6 @@ export default class MainScreen extends createjs.Container {
   constructor() {
     super();
 
-    dataManager.points = 1300;
-
     this.createLoveBar();
     this.createSlot();
     this.createGui();

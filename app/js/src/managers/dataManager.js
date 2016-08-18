@@ -1,9 +1,9 @@
 const dataManager = {
-  bet: 1,
-  minBet: 1,
-  maxBet: 3,
-  points: 0,
-  maxPoints: 6000,
+  bet: null,
+  minBet: null,
+  maxBet: null,
+  points: null,
+  maxPoints: null,
   changeBet(val) {
     this.bet += val;
     this.bet = this.bet < this.maxBet ? this.bet : this.maxBet;
