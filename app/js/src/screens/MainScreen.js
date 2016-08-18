@@ -15,14 +15,6 @@ export default class MainScreen extends createjs.Container {
     this.createWinTable();
     this.createGui();
   }
-  createGui() {
-    this.gui = new Gui();
-    this.gui.x = 125;
-    this.gui.y = 500;
-    this.addChild(this.gui);
-
-    this.gui.playBtn.on('click', this.rollSlot, this);
-  }
   rollSlot() {
     this.gui.toPlayState();
     this.gui.stopBtn.disable();
@@ -66,5 +58,23 @@ export default class MainScreen extends createjs.Container {
     this.winTable.x = 85;
     this.winTable.y = 50;
     this.addChild(this.winTable);
+  }
+  createGui() {
+    this.gui = new Gui();
+    this.gui.bet.text = dataManager.bet;
+    this.gui.x = 125;
+    this.gui.y = 500;
+    this.addChild(this.gui);
+
+    this.gui.betUp.addEventListener('click', () => {
+      this.gui.bet.text = dataManager.changeBet(1);
+      this.winTable.setBet(dataManager.bet);
+    });
+    this.gui.betDown.addEventListener('click', () => {
+      this.gui.bet.text = dataManager.changeBet(-1);
+      this.winTable.setBet(dataManager.bet);
+    });
+
+    this.gui.playBtn.on('click', this.rollSlot, this);
   }
 }
