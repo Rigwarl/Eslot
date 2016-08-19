@@ -42,7 +42,7 @@ export default class MainScreen extends createjs.Container {
     }, null, true);
   }
   createLoveBar() {
-    this.loveBar = new LoveBar();
+    this.loveBar = new LoveBar(dataManager.points, dataManager.maxPoints);
     this.loveBar.x = screenManager.width / 2;
     this.loveBar.y = 50;
     this.addChild(this.loveBar);
