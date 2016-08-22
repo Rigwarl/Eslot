@@ -30,9 +30,8 @@ export default class MainScreen extends createjs.Container {
       ]).then(() => this.slot.stop(r.symbols))
         .then(() => {
           dataManager.points = r.points;
-          this.loveBar.moveProgress(r.points);
-          this.gui.toReadyState();
-        });
+          return this.loveBar.moveProgress(r.points);
+        }).then(() => this.gui.toReadyState());
     });
   }
   bindStopBtnClick(callback) {
