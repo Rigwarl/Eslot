@@ -1,3 +1,4 @@
+import StartScreen from '../screens/StartScreen';
 import MainScreen from '../screens/MainScreen';
 
 const screenManager = {
@@ -8,7 +9,8 @@ const screenManager = {
     this.current = null;
 
     this.screens = {
-      main: MainScreen,
+      StartScreen,
+      MainScreen,
     };
   },
   change(screenName) {

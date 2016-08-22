@@ -26,7 +26,7 @@ const app = {
     this.stage.addChild(bg);
 
     screenManager.init(this.stage);
-    screenManager.change('main');
+    screenManager.change('StartScreen');
   },
   setData(data) {
     dataManager.bet = data.bet;
