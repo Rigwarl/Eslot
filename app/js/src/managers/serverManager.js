@@ -7,7 +7,7 @@ const serverManager = {
       maxBet: 5,
       points: this.currentPoints,
       maxPoints: 7000,
-      winTable: [],
+      winTable: [1, 2, 5, 25, 50],
     }), 1500));
   },
   roll(bet) {

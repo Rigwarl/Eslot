@@ -1,4 +1,3 @@
-import dataManager from '../managers/dataManager';
 import Btn from './Btn';
 
 export default class Gui extends createjs.Container {
@@ -14,21 +13,14 @@ export default class Gui extends createjs.Container {
     this.addChild(this.playBtn);
   }
   createBet() {
-    const betDown = new Btn('↓');
-    const betUp = new Btn('↑');
-    const bet = new createjs.Text(dataManager.bet, '35px Arial', '#000');
-    bet.x = 165;
-    bet.y = 8;
-    betUp.x = 200;
+    this.betDown = new Btn('↓');
+    this.betUp = new Btn('↑');
+    this.bet = new createjs.Text('', '35px Arial', '#000');
+    this.bet.x = 165;
+    this.bet.y = 8;
+    this.betUp.x = 200;
 
-    betUp.addEventListener('click', () => {
-      bet.text = dataManager.changeBet(1);
-    });
-    betDown.addEventListener('click', () => {
-      bet.text = dataManager.changeBet(-1);
-    });
-
-    this.addChild(betUp, betDown, bet);
+    this.addChild(this.betUp, this.betDown, this.bet);
   }
   toPlayState() {
     this.removeChild(this.playBtn);

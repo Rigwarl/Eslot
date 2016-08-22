@@ -33,6 +33,7 @@ const app = {
     dataManager.maxBet = data.maxBet;
     dataManager.minBet = data.minBet;
     dataManager.points = data.points;
+    dataManager.winTable = data.winTable;
     dataManager.maxPoints = data.maxPoints;
   },
   createPreloader() {
