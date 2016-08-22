@@ -27,11 +27,19 @@ export default class MainScreen extends createjs.Container {
       Promise.race([
         rollTimer,
         new Promise(resolve => this.bindStopBtnClick(resolve)),
-      ]).then(() => this.slot.stop(r.symbols))
-        .then(() => {
-          dataManager.points = r.points;
-          return this.loveBar.moveProgress(r.points);
-        }).then(() => this.gui.toReadyState());
+      ])
+      .then(() => this.slot.stop(r.symbols))
+      .then(() => {
+        dataManager.points = r.points;
+        return this.loveBar.moveProgress(r.points);
+      })
+      .then(() => {
+        if (r.finished) {
+          screenManager.change('WheelScreen');
+        } else {
+          this.gui.toReadyState();
+        }
+      });
     });
   }
   bindStopBtnClick(callback) {
