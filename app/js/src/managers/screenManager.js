@@ -1,5 +1,6 @@
 import StartScreen from '../screens/StartScreen';
 import MainScreen from '../screens/MainScreen';
+import WheelScreen from '../screens/WheelScreen';
 
 const screenManager = {
   init(stage) {
@@ -11,6 +12,7 @@ const screenManager = {
     this.screens = {
       StartScreen,
       MainScreen,
+      WheelScreen,
     };
   },
   change(screenName) {
