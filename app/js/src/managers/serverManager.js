@@ -1,5 +1,5 @@
 const data = {
-  points: 5300,
+  points: 0,
   win: 0,
   finished: false,
   bet: 3,
