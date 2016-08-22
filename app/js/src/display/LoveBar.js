@@ -17,13 +17,14 @@ export default class LoveBar extends createjs.Container {
     const rate = points / this.maxPoints;
     let amount = Math.floor(rate * this.chars.length);
 
-    createjs.Tween.get(this.progress)
+    return new Promise(resolve => createjs.Tween.get(this.progress)
       .to({ scaleX: rate }, 150)
       .call(() => {
         while (amount--) {
           this.chars[amount].color = '#fff';
         }
-      });
+        resolve();
+      }));
   }
   createChars() {
     const charWidth = this.width / this.text.length;
