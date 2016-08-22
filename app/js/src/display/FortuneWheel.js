@@ -6,6 +6,7 @@ export default class FortuneWheel extends createjs.Container {
     for (let i = 0; i < 10; i++) {
       this.createSlice(symbols[i], i);
     }
+    this.cache(-200, -200, 400, 400);
   }
   createSlice(symbol, i) {
     const slice = new createjs.Container();
@@ -32,6 +33,7 @@ export default class FortuneWheel extends createjs.Container {
         this.slices[num].bg.graphics = new createjs.Graphics().beginFill('#00ff00')
           .moveTo(0, 0)
           .arc(0, 0, 200, -Math.PI * (3 / 5), -Math.PI * (2 / 5));
+        this.updateCache();
         resolve();
       }));
   }
