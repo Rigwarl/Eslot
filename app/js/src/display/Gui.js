@@ -25,9 +25,15 @@ export default class Gui extends createjs.Container {
   toPlayState() {
     this.removeChild(this.playBtn);
     this.addChild(this.stopBtn);
+
+    this.betUp.disable();
+    this.betDown.disable();
   }
   toReadyState() {
     this.removeChild(this.stopBtn);
     this.addChild(this.playBtn);
+
+    this.betUp.enable();
+    this.betDown.enable();
   }
 }

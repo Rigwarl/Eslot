@@ -17,7 +17,7 @@ export default class MainScreen extends createjs.Container {
   }
   rollSlot() {
     this.gui.toPlayState();
-    this.gui.stopBtn.disable();
+    this.stopBtn.disable();
     this.slot.roll();
 
     const rollTimer = new Promise(resolve => setTimeout(resolve, 2500));
